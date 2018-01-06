@@ -1,10 +1,12 @@
 package com.bignerdranch.android.criminalintent;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +24,8 @@ public class CrimeListFragment extends Fragment {
     private TextView titleTextView;
     private TextView dateTextView;
 
+    private Crime crime;
+
     public CrimeHolder(LayoutInflater inflater, ViewGroup parent, int viewType) {
       super(inflater.inflate(viewType == 1 ? R.layout.list_item_crime_police : R.layout.list_item_crime, parent, false));
       itemView.setOnClickListener(this);
@@ -32,10 +36,10 @@ public class CrimeListFragment extends Fragment {
 
     @Override
     public void onClick(View view) {
-      Toast.makeText(getActivity(), crime.getTitle() + " clicked!", Toast.LENGTH_SHORT).show();
+      Intent intent = CrimeActivity.newIntent(getActivity(), crime.getId());
+      Log.d("CrimeListFragment", crime.getId().toString());
+      startActivity(intent);
     }
-
-    private Crime crime;
 
     public void bind(Crime crime) {
       this.crime = crime;
@@ -89,11 +93,21 @@ public class CrimeListFragment extends Fragment {
     return view;
   }
 
+  @Override
+  public void onResume() {
+    super.onResume();
+    updateUI();
+  }
+
   private void updateUI() {
     CrimeLab crimeLab = CrimeLab.get(getActivity());
     List<Crime> crimes = crimeLab.getCrimes();
 
-    adapter = new CrimeAdapter(crimes);
-    crimeRecyclerView.setAdapter(adapter);
+    if (adapter == null) {
+      adapter = new CrimeAdapter(crimes);
+      crimeRecyclerView.setAdapter(adapter);
+    } else {
+      adapter.notifyDataSetChanged();
+    }
   }
 }

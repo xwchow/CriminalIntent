@@ -1,11 +1,16 @@
 package com.bignerdranch.android.criminalintent;
 
 import android.content.Context;
+import android.util.Log;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
 public class CrimeLab {
+
+  private static final String TAG = "CrimeLab";
+
   private static CrimeLab crimeLab;
 
   private List<Crime> crimes;
@@ -34,11 +39,11 @@ public class CrimeLab {
 
   public Crime getCrime(UUID id) {
     for (Crime crime : crimes) {
-      if (crime.getId() == id) {
+      if (crime.getId().equals(id)) {
         return crime;
       }
     }
-
+    Log.e(TAG, "crime_id not matched");
     return null;
   }
 }
