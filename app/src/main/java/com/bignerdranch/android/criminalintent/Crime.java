@@ -4,50 +4,42 @@ import java.util.Date;
 import java.util.UUID;
 
 public class Crime {
-  private UUID id;
-  private String title;
-  private Date date;
-  private boolean solved;
-  private boolean requiresPolice;
 
-  public Crime() {
-    id = UUID.randomUUID();
-    date = new Date();
-  }
+    private UUID mId;
+    private String mTitle;
+    private Date mDate;
+    private boolean mSolved;
 
-  public UUID getId() {
-    return id;
-  }
+    public Crime() {
+        mId = UUID.randomUUID();
+        mDate = new Date();
+    }
 
-  public String getTitle() {
-    return title;
-  }
+    public UUID getId() {
+        return mId;
+    }
 
-  public void setTitle(String title) {
-    this.title = title;
-  }
+    public String getTitle() {
+        return mTitle;
+    }
 
-  public Date getDate() {
-    return date;
-  }
+    public void setTitle(String title) {
+        mTitle = title;
+    }
 
-  public void setDate(Date date) {
-    this.date = date;
-  }
+    public Date getDate() {
+        return mDate;
+    }
 
-  public boolean isSolved() {
-    return solved;
-  }
+    public void setDate(Date date) {
+        mDate = date;
+    }
 
-  public void setSolved(boolean solved) {
-    this.solved = solved;
-  }
+    public boolean isSolved() {
+        return mSolved;
+    }
 
-  public boolean isRequiresPolice() {
-    return requiresPolice;
-  }
-
-  public void setRequiresPolice(boolean requiresPolice) {
-    this.requiresPolice = requiresPolice;
-  }
+    public void setSolved(boolean solved) {
+        mSolved = solved;
+    }
 }
